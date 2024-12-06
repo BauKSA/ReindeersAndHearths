@@ -26,10 +26,18 @@ std::vector<BaseActor*> initialize_bricks() {
 
 	pos_x = 0;
 	for (size_t i = 0; i < 13; i++) {
-		if (i == 6) {
+		if (i == 3) {
 			std::string name = "brick-b-" + std::to_string(i);
 			BaseActor* brick = new BaseActor(name, pos_x, 226);
-			brick->initialize_sprite("./sprites/middle-brick.png");
+			brick->initialize_sprite("./sprites/right-brick-border.png");
+			bricks.push_back(brick);
+			brick->disable_movement();
+			pos_x += brick->get_width() + 24 + 16;
+		}
+		else if (i == 4) {
+			std::string name = "brick-b-" + std::to_string(i);
+			BaseActor* brick = new BaseActor(name, pos_x, 226);
+			brick->initialize_sprite("./sprites/left-brick-border.png");
 			bricks.push_back(brick);
 			brick->disable_movement();
 			pos_x += brick->get_width();
@@ -46,10 +54,18 @@ std::vector<BaseActor*> initialize_bricks() {
 
 	pos_x = 0;
 	for (size_t i = 0; i < 13; i++) {
-		if (i == 6) {
+		if (i == 8) {
 			std::string name = "brick-b-" + std::to_string(i);
 			BaseActor* brick = new BaseActor(name, pos_x, 84);
-			brick->initialize_sprite("./sprites/middle-brick.png");
+			brick->initialize_sprite("./sprites/right-brick-border.png");
+			bricks.push_back(brick);
+			brick->disable_movement();
+			pos_x += brick->get_width() + 24 + 16;
+		}
+		else if (i == 9) {
+			std::string name = "brick-b-" + std::to_string(i);
+			BaseActor* brick = new BaseActor(name, pos_x, 84);
+			brick->initialize_sprite("./sprites/left-brick-border.png");
 			bricks.push_back(brick);
 			brick->disable_movement();
 			pos_x += brick->get_width();
@@ -68,7 +84,7 @@ std::vector<BaseActor*> initialize_bricks() {
 }
 
 BaseActor* initialize_tree() {
-	BaseActor* tree = new BaseActor("tree", 326, 10);
+	BaseActor* tree = new BaseActor("tree", 326, 10, OVERLAP);
 	tree->initialize_sprite("./sprites/tree.png");
 
 	return tree;
@@ -134,7 +150,7 @@ Player* initialize_test() {
 		"./sprites/pj/burn-b.png"
 	};
 
-	Player* actor = new Player("test_actor", 50, FIRST_FLOOR - 16, 2.125);
+	Player* actor = new Player("player", 50, FIRST_FLOOR - 16, 2.5);
 	actor->initialize({
 		stand_right,
 		stand_left,
@@ -207,7 +223,7 @@ InputSystem* initialize_input() {
 	KeyCommand sleft(JOY_BUTTON_LEFT, false, stand_left);
 	KeyCommand close(JOY_BUTTON_START, true, _close);
 	KeyCommand jump(JOY_BUTTON_A, true, _jump);
-	KeyCommand climb(JOY_BUTTON_UP, true, _climb);
+	KeyCommand climb(JOY_BUTTON_B, true, _climb);
 	KeyCommand down(JOY_BUTTON_DOWN, true, _down);
 
 	std::vector<KeyCommand> commands{ right, left, sright, sleft, close, jump, climb, down };

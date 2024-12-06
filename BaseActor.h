@@ -73,6 +73,7 @@ public:
 	//Declared
 	//Move
 	void disable_movement() { has_movement = false; };
+	void enable_movement() { has_movement = true; }
 	void disable_limits() { limits = false; };
 
 	//Speed

@@ -16,6 +16,7 @@ void CollisionSystem::update() {
 
 		for (size_t j = 0; j < actors.size(); j++) {
 			if (!actors.at(j)) continue;
+			//if (actors.at(i)->get_name() == "player" && actors.at(j)->get_name() == "thief") continue;
 
 			if (actors.at(i) != actors.at(j)) {
 				BaseActor* actor_1 = actors.at(i);
@@ -39,7 +40,7 @@ void CollisionSystem::update() {
 				if ((actor_1_right > actor_2_left && actor_1_left < actor_2_right)) {
 					if ((actor_1_floor > actor_2_ceil && std::abs(actor_1_floor - actor_2_ceil) < MAX_STEP)
 						|| (actor_1_floor < actor_2_ceil && std::abs(actor_1_floor - actor_2_ceil) < MIN_STEP)) {
-						if (actor_1->get_collision() == BLOCK && actor_2->get_collision() == BLOCK) {
+						if (actor_2->get_collision() == BLOCK) {
 							actor_1->set_collision(DOWN, actor_2->get_y() - (actor_2->get_height() / 2) + 0.01);
 							cdown = true;
 						}
@@ -51,9 +52,10 @@ void CollisionSystem::update() {
 
 				//Si hay coincidencia en Y
 				if ((actor_1_floor - MAX_STEP > actor_2_ceil) && (actor_1_ceil < actor_2_floor)) {
+
 					//Buscamos colisión en RIGHT
 					if (actor_1_right + 1 > actor_2_left && actor_1_right < actor_2_right) {
-						if (actor_1->get_collision() == BLOCK && actor_2->get_collision() == BLOCK) {
+						if (actor_2->get_collision() == BLOCK) {
 							actor_1->set_collision(RIGHT);
 							cright = true;
 						}
@@ -64,7 +66,7 @@ void CollisionSystem::update() {
 
 					//Buscamos colisión en LEFT
 					if (actor_1_left > actor_2_left && actor_1_left - 1 < actor_2_right) {
-						if (actor_1->get_collision() == BLOCK && actor_2->get_collision() == BLOCK) {
+						if (actor_2->get_collision() == BLOCK) {
 							actor_1->set_collision(LEFT);
 							cleft = true;
 						}

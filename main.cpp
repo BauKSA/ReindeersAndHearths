@@ -9,6 +9,7 @@
 #include "LevelManager.h"
 #include "IgniterSpawner.h"
 #include "Garbage.h"
+#include "ThiefSpawner.h"
 
 int main(int argc, char** argv) {
 	AllegroManager* alManager = new AllegroManager;
@@ -77,6 +78,7 @@ int main(int argc, char** argv) {
 	tick_system->add_actor(test_player);
 
 	IgniterSpawner& spawner = IgniterSpawner::instance();
+	ThiefSpawner& thief_spawner = ThiefSpawner::instance();
 
 	CollisionSystem* collision_system = new CollisionSystem();
 	collision_system->add_actor(test_player);
@@ -89,7 +91,7 @@ int main(int argc, char** argv) {
 		collision_system->add_actor(hearths.at(i));
 	}
 
-	//Garbage TEST
+	//Garbage
 	Garbage::instance();
 
 	//Configuramos el MemoryManager
@@ -136,6 +138,8 @@ int main(int argc, char** argv) {
 
 		tick_system->update(delta_time);
 		IgniterSpawner::instance().tick(delta_time);
+		ThiefSpawner::instance().tick(delta_time);
+
 		collision_system->update();
 
 		for (size_t i = 0; i < bricks.size(); i++) {

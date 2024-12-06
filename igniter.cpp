@@ -24,7 +24,7 @@ void Igniter::check_hearth() {
 	Hearth* hearth = dynamic_cast<Hearth*>(collider);
 	if (!hearth) return;
 
-	if (y >= hearth->get_y() + hearth->get_height() - 10) {
+	if (y >= hearth->get_y() + hearth->get_height() - 20) {
 		hearth->fire();
 		Garbage::instance().move_to_bin(this);
 	}
@@ -37,6 +37,7 @@ void Igniter::check_hearth() {
 			direction = DOWN;
 			mright = false;
 			mleft = false;
+			set_animation("down");
 		}
 
 	}

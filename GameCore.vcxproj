@@ -208,6 +208,8 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="moveCommands.cpp" />
     <ClCompile Include="test.cpp" />
+    <ClCompile Include="thief.cpp" />
+    <ClCompile Include="thiefSpawner.cpp" />
     <ClCompile Include="tickSystem.cpp" />
     <ClCompile Include="utils.cpp" />
   </ItemGroup>
@@ -246,6 +248,8 @@
     <ClInclude Include="JumpComponent.h" />
     <ClInclude Include="MoveCommands.h" />
     <ClInclude Include="Test.h" />
+    <ClInclude Include="Thief.h" />
+    <ClInclude Include="ThiefSpawner.h" />
     <ClInclude Include="TickSystem.h" />
     <ClInclude Include="Timer.h" />
     <ClInclude Include="InputSystem.h" />

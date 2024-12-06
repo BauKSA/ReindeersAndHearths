@@ -82,6 +82,12 @@
     <ClCompile Include="garbage.cpp">
       <Filter>Archivos de encabezado\Systems\Garbage</Filter>
     </ClCompile>
+    <ClCompile Include="thief.cpp">
+      <Filter>Archivos de encabezado\Actors\Enemy\Thief</Filter>
+    </ClCompile>
+    <ClCompile Include="thiefSpawner.cpp">
+      <Filter>Archivos de encabezado\Spawner\Thief</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AnimatedActor.h">
@@ -197,6 +203,12 @@
     </ClInclude>
     <ClInclude Include="Garbage.h">
       <Filter>Archivos de encabezado\Systems\Garbage</Filter>
+    </ClInclude>
+    <ClInclude Include="Thief.h">
+      <Filter>Archivos de encabezado\Actors\Enemy\Thief</Filter>
+    </ClInclude>
+    <ClInclude Include="ThiefSpawner.h">
+      <Filter>Archivos de encabezado\Spawner\Thief</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -331,6 +343,12 @@
     </Filter>
     <Filter Include="Archivos de encabezado\Systems\Garbage">
       <UniqueIdentifier>{9a735c94-21b5-4c42-ae56-04e035a296b8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de encabezado\Actors\Enemy\Thief">
+      <UniqueIdentifier>{41cbab97-80f7-43f9-ac3f-32bc476e69dc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de encabezado\Spawner\Thief">
+      <UniqueIdentifier>{32a145aa-ddd7-4270-add3-f2a21e5b420c}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

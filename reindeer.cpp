@@ -26,11 +26,11 @@ void Reindeer::tick(float delta_time) {
 		mleft = false;
 	}
 
-	if (x >= 55 && temp_delay >= spawn_delay) {
+	if (x >= 55 && x <= 350 && temp_delay >= spawn_delay) {
 		spawn();
 
 		temp_delay = 0;
-		spawn_delay = generate_random(1, 10);
+		spawn_delay = generate_random(1, 7);
 	} else {
 		temp_delay += delta_time;
 	}
@@ -43,13 +43,14 @@ void Reindeer::tick(float delta_time) {
 
 void Reindeer::spawn() {
 	Observer& obs = Observer::instance();
+	float random = generate_random(0, 1);
 	if (obs.get_presents() >= LevelManager::instance().present_limit()) return;
 
 	AnimationPaths _default;
 	_default.name = "default";
-	_default.paths = {
-		"./sprites/presents/present-b.png"
-	};
+	if(random < 0.33f) _default.paths = { "./sprites/presents/present-a.png" };
+	else if (random < 0.66f) _default.paths = { "./sprites/presents/present-b.png" };
+	else _default.paths = { "./sprites/presents/present-c.png" };
 
 	float px = x + (sprite->width / 2.0f) - 8;
 	float py = y + sprite->height + 2;

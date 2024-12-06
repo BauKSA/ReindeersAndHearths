@@ -10,22 +10,32 @@ void IgniterSpawner::tick(float delta_time) {
 }
 
 void IgniterSpawner::spawn() {
-	float rndm = generate_random(0, 2);
-	float y = rndm >= 1 ? SCREEN_HEIGHT - 140 : SCREEN_HEIGHT - 280;
-	float x = y == SCREEN_HEIGHT - 140 ? 0 : 300;
+	float rndm = generate_random(1, 5);
+	float y = 0;
+	if (rndm < 2.5f) y = generate_random(318, 368);
+	else y = generate_random(176, 226);
+
+	float x = rndm < 2.5f ? 0 : 300;
 	directions dir = x == 0 ? RIGHT : LEFT;
 
 	AnimationPaths ign;
-	ign.name = "defaukt";
+	ign.name = "default";
 	ign.paths = {
-		"./sprites/enemies/igniter/igniter-left-a.png",
-		"./sprites/enemies/igniter/igniter-left-b.png",
-		"./sprites/enemies/igniter/igniter-left-c.png",
-		"./sprites/enemies/igniter/igniter-left-d.png"
+		"./sprites/enemies/igniter/igniter-a.png",
+		"./sprites/enemies/igniter/igniter-b.png",
+		"./sprites/enemies/igniter/igniter-c.png",
+		"./sprites/enemies/igniter/igniter-b.png"
+	};
+
+	AnimationPaths down;
+	down.name = "down";
+	down.paths = {
+		"./sprites/enemies/igniter/igniter-down-a.png",
+		"./sprites/enemies/igniter/igniter-down-b.png"
 	};
 
 	Igniter* igniter = new Igniter("igniter", x, y, 1.5f, dir);
-	igniter->initialize({ ign });
+	igniter->initialize({ ign, down });
 	igniter->set_vspeed(1.5f);
 
 	Observer::instance().add_actor_tick(igniter);

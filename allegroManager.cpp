@@ -31,6 +31,7 @@ void AllegroManager::init() {
     create_queue();
 
     al_set_new_bitmap_flags(ALLEGRO_NO_PRESERVE_TEXTURE);
+    al_hide_mouse_cursor(display);
 }
 
 void AllegroManager::init_addons() {

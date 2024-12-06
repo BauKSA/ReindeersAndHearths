@@ -4,6 +4,7 @@
 #include "GlobalSystem.h"
 #include "Hearth.h"
 #include "Observer.h"
+#include "Igniter.h"
 
 void Player::tick(float delta_time) {
 	if (frozen && freeze_time <= 0) {
@@ -18,12 +19,13 @@ void Player::tick(float delta_time) {
 		return;
 	}
 
-	if (x >= 600 || y >= 400 || x <= 0 || y <= 0) {
+	if (x >= 600 || y >= 400 || x < -1 || y <= 0) {
 		x = 25;
 		y = SCREEN_HEIGHT - 55;
 	}
 
 	check_present();
+	check_igniter();
 	AnimatedActor::tick(delta_time);
 }
 
@@ -59,6 +61,13 @@ void Player::climb() {
 				set_animation("burn");
 				freeze(1.5f);
 				lives--;
+				
+				if (present) {
+					present = false;
+					Garbage::instance().move_to_bin(present_ptr);
+					present_ptr = nullptr;
+					GlobalSystem::lose_present();
+				}
 			}
 		}
 	}
@@ -102,14 +111,16 @@ void Player::down() {
 
 void Player::set_collider(BaseActor* actor) {
 	BaseActor::set_collider(actor);
-	check_present();
 	if (!collider) return;
+	check_present();
+	check_igniter();
 	if (collider->get_name() == "tree") dispatch_present();
 }
 
 void Player::check_present() {
 	if (!collider) return;
 	if (present) return;
+
 	ShadowActor* _shadow = dynamic_cast<ShadowActor*>(collider);
 	if (_shadow) {
 		_shadow->set_shadow(this);
@@ -138,6 +149,19 @@ void Player::dispatch_present() {
 
 	Garbage::instance().move_to_bin(present_ptr);
 	present_ptr = nullptr;
-	GlobalSystem::sum_points(25);
+	GlobalSystem::sum_points(1);
 	Observer::instance().delete_present();
+}
+
+void Player::check_igniter() {
+	if (!collider) return;
+
+	Igniter* igniter = dynamic_cast<Igniter*>(collider);
+	if (igniter) {
+		igniter->set_collider(nullptr);
+		Garbage::instance().move_to_bin(igniter);
+		set_animation("burn");
+		freeze(1.5f);
+		lives--;
+	}
 }

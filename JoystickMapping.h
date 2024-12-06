@@ -7,6 +7,7 @@
 #define JOY_BUTTON_RIGHT 10
 #define JOY_BUTTON_LEFT 11
 #define JOY_BUTTON_A 0
+#define JOY_BUTTON_B 1
 
 #define JOY_BUTTON_START 9
 
